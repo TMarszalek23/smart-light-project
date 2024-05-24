@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_DB: smart_light_db
+      POSTGRES_USER: smart_light_user
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
+
+  web:
+    build: .
+    environment:
+      FLASK_APP: run.py
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
